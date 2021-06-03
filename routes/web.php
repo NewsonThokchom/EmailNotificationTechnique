@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SendNotificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/notification-form', [SendNotificationController::class, 'index'])->name('notificationForm');
+Route::post('/send-notification', [SendNotificationController::class, 'store'])->name('sendNotification');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\SendNotification;
+use App\Models\User;
+use App\Notifications\SendNotification as NotificationsSendNotification;
 use Illuminate\Http\Request;
 
 class SendNotificationController extends Controller
@@ -14,7 +16,7 @@ class SendNotificationController extends Controller
      */
     public function index()
     {
-        //
+        return view('sendNotificationForm');
     }
 
     /**
@@ -35,7 +37,14 @@ class SendNotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $users = User::get();
+        // dd($user);
+        foreach ($users as $key => $user) {
+
+            $user->notify(new NotificationsSendNotification($user));
+        }
+
+        dd('Successfully sent');
     }
 
     /**
