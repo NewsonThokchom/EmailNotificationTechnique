@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TaskEvent;
 use App\Models\SendNotification;
 use App\Models\User;
 use App\Notifications\SendNotification as NotificationsSendNotification;
@@ -40,14 +41,13 @@ class SendNotificationController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = User::first();
-        $users = User::get();
-        // dd($user);
 
+        // $user = User::first();
         // send to single a user
         // $user->notify(new NotificationsSendNotification($user));
 
-        Notification::send($users, new NotificationsSendNotification($users));
+        $users = User::get();
+        event(new TaskEvent($users));
 
         return Redirect::back()->with('message', 'Email successfully sent');
     }

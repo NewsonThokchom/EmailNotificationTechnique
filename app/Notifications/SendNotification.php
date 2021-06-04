@@ -10,16 +10,16 @@ use Illuminate\Notifications\Notification;
 class SendNotification extends Notification
 {
     use Queueable;
-    public $user_data;
+
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user_data)
+    public function __construct()
     {
-        $this->user_data = $user_data;
+        //
     }
 
     /**
@@ -42,7 +42,7 @@ class SendNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line("The introduction to the notification")
+            ->line("The introduction to the notification {$notifiable->name}")
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
     }
