@@ -6,6 +6,9 @@ use App\Models\SendNotification;
 use App\Models\User;
 use App\Notifications\SendNotification as NotificationsSendNotification;
 use Illuminate\Http\Request;
+// use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Notification;
 
 class SendNotificationController extends Controller
 {
@@ -37,14 +40,16 @@ class SendNotificationController extends Controller
      */
     public function store(Request $request)
     {
+        // $user = User::first();
         $users = User::get();
         // dd($user);
-        foreach ($users as $key => $user) {
 
-            $user->notify(new NotificationsSendNotification($user));
-        }
+        // send to single a user
+        // $user->notify(new NotificationsSendNotification($user));
 
-        dd('Successfully sent');
+        Notification::send($users, new NotificationsSendNotification($users));
+
+        return Redirect::back()->with('message', 'Email successfully sent');
     }
 
     /**

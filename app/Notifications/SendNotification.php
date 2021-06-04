@@ -42,7 +42,7 @@ class SendNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line("The introduction to the notification from  {$this->user_data->name}")
+            ->line("The introduction to the notification")
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
     }

@@ -13,6 +13,11 @@
 <body>
 
     <div class="container mt-5 p-5 border rounded ">
+
+        @if (Session::has('message'))
+            <div class="alert alert-success"> {{ Session::get('message') }}</div>
+        @endif
+
         <form action="{{ route('sendNotification') }}" method="POST">
             @csrf
             <div class="mb-4">
