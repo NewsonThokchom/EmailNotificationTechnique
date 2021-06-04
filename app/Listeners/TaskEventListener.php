@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\SendNotification as NotificationsSendNotification;
 
-class TaskEventListener
+class TaskEventListener implements ShouldQueue
 {
     /**
      * Create the event listener.
